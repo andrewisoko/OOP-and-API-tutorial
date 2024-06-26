@@ -6,6 +6,7 @@ import json
 #              #
 # =============#
 
+
 class Chat:
     def __init__(self, users, messages):
         self.users= users
@@ -129,11 +130,14 @@ def get_message_by_author(author):
 #                     #
 # ====================#
 
-username = input("Create a user?")
-create_user(username)
 
-user_message = input("Type a message?")
-create_message(user_message, username)
+# ANDREW
 
 
-print(get_message_by_author(username))
+# Using the input() function from the user, 
+# create a chat experience where the first user can see messages from the second user
+
+# Create the chat with 2 users
+# Prompt the user 1 to enter a message
+# Prompt the user 2 to enter a message
+# Figure out the replies 
