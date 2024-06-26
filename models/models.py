@@ -5,33 +5,27 @@
 # =============#
 
 
-class Model(object):
-
-    def __init__(self, **params) -> None:
-        self.params = params
-
-    def as_dict(self):
-        return self.params
-
-
-class Meme(Model):
+class Meme:
     def __init__(self, url):
         self.url = url
-        super().__init__(url=url)
 
 
-class User(Model):
+class User:
     def __init__(self, name):
         self.name = name
-        super().__init__(name=name)
 
+    def __repr__(self) -> str:
+        return f"{self.__dict__}"
 
-class Message(Model):
+class Message:
     def __init__(self, text, author: User):
         self.text = text
         self.author = author
-        super().__init__(text=text, author=author)
 
+
+user = User("Kesler")
+
+print(user)
 
 # ================#
 #                 #
@@ -41,6 +35,9 @@ class Message(Model):
 
 
 def save_to_db(object):
+
+    model = object.__dict__
+
     with open("db.json", "w") as f:
         f.write(object)
 
@@ -54,8 +51,6 @@ def save_to_db(object):
 
 def create_user(name):
     user = User(name)
-
-    save_to_db(str(user.as_dict()))
 
 
 def create_message(text, author):
