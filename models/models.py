@@ -13,10 +13,8 @@ class Meme:
 
 
 class User:
-    def __init__(self, name, age, image):
+    def __init__(self, name):
         self.name = name
-        self.age = age
-        self.image= image
 
 
 class Message:
@@ -77,7 +75,14 @@ def save_to_db(object, object_name):
         db_file.write(json.dumps(new_db))
 
 
-def read_from_db():
+def read_from_db(object_name):
+    
+    # Open the json file as a dictionary.
+    with open("db.json", "r") as db_file:
+        current_db = json.load(db_file)
+
+    return current_db[object_name]
+
 
 # ================#
 #                 #
@@ -86,15 +91,32 @@ def read_from_db():
 # ================#
 
 
-def create_user(name, age, image):
-    user = User(name, age, image)
+def create_user(name):
+    user = User(name)
 
     save_to_db(user, "user")
+
+
+def get_user(name):
+    users = read_from_db("user")
+    for user in users:
+        if user.get("name") == name:
+            return user
 
 
 def create_message(text, author):
     message = Message(text, author)
     save_to_db(message, "message")
+
+
+def get_message_by_author(author):
+    messages = read_from_db("message")
+    user_messages = []
+    for message in messages:
+        if message.get("author") == author:
+            user_messages.append(message)
+
+    return user_messages
 
 
 # ====================#
@@ -104,5 +126,3 @@ def create_message(text, author):
 # ====================#
 
 
-
-# create_message("This is the text", "Kesler")
