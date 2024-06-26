@@ -6,6 +6,10 @@ import json
 #              #
 # =============#
 
+class Chat:
+    def __init__(self, users, messages):
+        self.users= users
+        self.messages = messages
 
 class Meme:
     def __init__(self, url):
@@ -84,11 +88,11 @@ def read_from_db(object_name):
     return current_db[object_name]
 
 
-# ================#
-#                 #
-#   USE CASES     #
-#                 #
-# ================#
+# ====================#
+#                     #
+#   FUNCTIONALITY     #
+#                     #
+# ====================#
 
 
 def create_user(name):
@@ -125,4 +129,11 @@ def get_message_by_author(author):
 #                     #
 # ====================#
 
+username = input("Create a user?")
+create_user(username)
 
+user_message = input("Type a message?")
+create_message(user_message, username)
+
+
+print(get_message_by_author(username))
