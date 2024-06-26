@@ -1,31 +1,23 @@
+import json
+
 # =============#
 #              #
 #   MODELS     #
 #              #
 # =============#
 
-
 class Meme:
     def __init__(self, url):
         self.url = url
-
 
 class User:
     def __init__(self, name):
         self.name = name
 
-    def __repr__(self) -> str:
-        return f"{self.__dict__}"
-
 class Message:
-    def __init__(self, text, author: User):
+    def __init__(self, text, author):
         self.text = text
         self.author = author
-
-
-user = User("Kesler")
-
-print(user)
 
 # ================#
 #                 #
@@ -33,11 +25,10 @@ print(user)
 #                 #
 # ================#
 
-
 def save_to_db(object):
 
     model = object.__dict__
-
+    
     with open("db.json", "w") as f:
         f.write(object)
 
